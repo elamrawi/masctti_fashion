@@ -14,15 +14,15 @@ class CardPayment extends StatelessWidget {
     return Container(
       width: 262,
       height: 87,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(6),
+        border: Border.all(
+          color: value == payment ? Color(0xff838894) : Color(0xffE8E9EA),
+        ),
+      ),
       child: RadioListTile(
         autofocus: true,
         visualDensity: VisualDensity.compact,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(6),
-          side: BorderSide(
-            color: value == payment ? Color(0xff838894) : Color(0xffE8E9EA),
-          ),
-        ),
         contentPadding: const EdgeInsets.only(top: 10, bottom: 16, right: 10),
         title: Container(
             width: 66,

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:masctti_fashion/components/PrimaryButton.dart';
 import 'package:masctti_fashion/components/auth/PrimaryTextField.dart';
 import 'package:masctti_fashion/components/profile/ContentAboutUs.dart';
-import 'package:masctti_fashion/components/profile/ProfileLayout.dart';
+import 'package:masctti_fashion/components/LayoutSinglePage.dart';
 import 'package:masctti_fashion/components/profile/TitleAboutUs.dart';
 
 class AboutUs extends StatelessWidget {
@@ -10,7 +10,7 @@ class AboutUs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProfileLayout(title: "من نحن", children: [
+    return LayoutSinglePage(title: "من نحن", children: [
       TitleAboutUs("من نحن ؟"),
       ContentAboutUs(
           "هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص  مولد النص العربى، حيث يمكنك أن تولد مثل هذا النص أو العديد من"),

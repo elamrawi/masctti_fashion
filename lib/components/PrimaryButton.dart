@@ -3,11 +3,10 @@ import 'package:get/get.dart';
 
 class PrimaryButton extends StatelessWidget {
   final String text;
+  final bool isFullWidth;
   final onPressed;
-  const PrimaryButton({
-    required this.text,
-    required this.onPressed,
-  });
+  const PrimaryButton(
+      {required this.text, required this.onPressed, this.isFullWidth = true});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +19,8 @@ class PrimaryButton extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.only(top: 4),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
-          fixedSize: Size(MediaQuery.of(context).size.width, 48),
+          fixedSize:
+              isFullWidth ? Size(MediaQuery.of(context).size.width, 48) : null,
         ),
       ),
     );

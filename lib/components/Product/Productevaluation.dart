@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-class Productevaluation extends StatelessWidget {
+class ProductEvaluation extends StatelessWidget {
   final int evaluation;
-  const Productevaluation(this.evaluation);
+  final double size;
+  const ProductEvaluation(this.evaluation, {this.size = 7});
   List<Widget> get getstars {
     List<Widget> stars = [];
     for (int i = 1; i <= 5; i++) {
@@ -10,13 +11,13 @@ class Productevaluation extends StatelessWidget {
         stars.add(Icon(
           Icons.star,
           color: Color(0xffFFA800),
-          size: 7,
+          size: size,
         ));
       else
         stars.add(Icon(
           Icons.star,
           color: Color(0xff838894),
-          size: 7,
+          size: size,
         ));
     }
     return stars;

@@ -76,7 +76,17 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     # all
+    # product
     - assets/images/product.png
+    - assets/images/product/avatar_evla.jpg
+    - assets/images/product/order.jpg
+    - assets/images/icon_detail.png
+    - assets/images/product/pro-1.png
+    - assets/images/product/pro-2.png
+    - assets/images/product/pro-3.png
+    - assets/images/product/pro-4.png
+    # home
+    - assets/images/ad.png
     # auth
     - assets/images/facebook.png
     - assets/images/google.png
@@ -86,6 +96,8 @@ flutter:
     - assets/images/payments/google-pay.png
     - assets/images/payments/stc-pay.png
     # # svgs
+    # product
+    - assets/svgs/icon_detail_item.svg
     # # profile
     - assets/svgs/camera.svg
     - assets/svgs/location.svg

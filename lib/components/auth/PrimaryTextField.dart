@@ -8,12 +8,14 @@ class PrimaryTextField extends StatelessWidget {
   final TextInputType? keyboardType;
   final validator;
   final int maxLines;
+  final Widget? prefix;
   PrimaryTextField(
       {required this.label,
       required this.hintText,
       this.isPass = false,
       this.keyboardType,
       required this.validator,
+      this.prefix,
       this.maxLines = 1});
 
   @override
@@ -53,6 +55,7 @@ class PrimaryTextField extends StatelessWidget {
                   textAlignVertical: TextAlignVertical.bottom,
                   style: TextStyle(fontSize: 16),
                   decoration: InputDecoration(
+                    prefixIcon: prefix,
                     labelStyle: TextStyle(
                         fontSize: 16,
                         color: Color(0xff31394D).withOpacity(0.6)),

@@ -4,14 +4,14 @@ import 'package:masctti_fashion/components/PrimaryButton.dart';
 import 'package:masctti_fashion/components/auth/PrimaryTextField.dart';
 import 'package:masctti_fashion/components/auth/QuestionAuth.dart';
 import 'package:masctti_fashion/components/auth/QuestionForgotPassword.dart';
-import 'package:masctti_fashion/components/profile/ProfileLayout.dart';
+import 'package:masctti_fashion/components/LayoutSinglePage.dart';
 
 class ChangePassword extends StatelessWidget {
   const ChangePassword({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ProfileLayout(title: "تغيير كلمة المرور", children: [
+    return LayoutSinglePage(title: "تغيير كلمة المرور", children: [
       PrimaryTextField(
         label: 'كلمة المرور الحالية',
         hintText: "",

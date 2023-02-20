@@ -1,5 +1,8 @@
 import 'package:get/get.dart';
 import 'package:masctti_fashion/views/Home.dart';
+import 'package:masctti_fashion/views/Layout.dart';
+import 'package:masctti_fashion/views/Search.dart';
+import 'package:masctti_fashion/views/SingleProduct.dart';
 import 'package:masctti_fashion/views/auth/ForgotPassword.dart';
 import 'package:masctti_fashion/views/auth/Login.dart';
 import 'package:masctti_fashion/views/auth/NewPassword.dart';
@@ -11,6 +14,8 @@ import 'package:masctti_fashion/views/profile/Favorite.dart';
 import 'package:masctti_fashion/views/profile/PaymentEdit.dart';
 import 'package:masctti_fashion/views/profile/PresonalInfo.dart';
 import 'package:masctti_fashion/views/profile/Profile.dart';
+
+import 'views/ConfirmOrder.dart';
 
 final List<GetPage> routes = [
   GetPage(name: '/', page: () => Login()),
@@ -27,4 +32,9 @@ final List<GetPage> routes = [
   GetPage(name: '/payment-edit', page: () => PaymentEdit()),
   GetPage(name: '/about-us', page: () => AboutUs()),
   GetPage(name: '/favorite', page: () => Favorite()),
+  GetPage(name: '/layout', page: () => Layout()),
+  GetPage(name: '/search', page: () => Search()),
+  // all
+  GetPage(name: '/single-product', page: () => SingleProduct()),
+  GetPage(name: '/confirm-order', page: () => ConfirmOrder()),
 ];

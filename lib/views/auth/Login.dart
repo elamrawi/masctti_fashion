@@ -71,7 +71,7 @@ class Login extends StatelessWidget {
       PrimaryButton(
           text: 'تسجيل الدخول',
           onPressed: () {
-            Get.offNamed('/profile');
+            Get.offNamed('/layout');
           }),
       LineAuth('سجّل من خلال'),
       ContainerButtonSocial(),

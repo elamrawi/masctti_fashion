@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:masctti_fashion/components/PrimaryButton.dart';
 import 'package:masctti_fashion/components/auth/PrimaryTextField.dart';
 import 'package:masctti_fashion/components/profile/AvatarEdit.dart';
-import 'package:masctti_fashion/components/profile/ProfileLayout.dart';
+import 'package:masctti_fashion/components/LayoutSinglePage.dart';
 
 class PersonalInfo extends StatelessWidget {
   const PersonalInfo({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ProfileLayout(title: "المعلومات الشخصية", children: [
+    return LayoutSinglePage(title: "المعلومات الشخصية", children: [
       Align(alignment: Alignment.centerRight, child: AvatarEdit()),
       PrimaryTextField(
           label: 'اسم المستخدم',

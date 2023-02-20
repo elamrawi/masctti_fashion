@@ -42,7 +42,7 @@ class SignUp extends StatelessWidget {
         PrimaryButton(
             text: 'انشاء حساب',
             onPressed: () {
-              Get.offNamed('/profile');
+              Get.offNamed('/layout');
             }),
         LineAuth('أنشئ من خلال'),
         ContainerButtonSocial(),

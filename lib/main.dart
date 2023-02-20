@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:masctti_fashion/routes.dart';
 import 'package:masctti_fashion/views/auth/Login.dart';
 
-void main(){
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(App());
 }
@@ -28,12 +29,11 @@ class App extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          brightness: Brightness.light,
-          textTheme: TextTheme(labelMedium: TextStyle(fontSize: 16)),
+          textTheme: const TextTheme(labelMedium: TextStyle(fontSize: 16)),
           scaffoldBackgroundColor: Colors.white,
           primarySwatch: MaterialColor(0xffBF3027, colorCodes),
-          // primaryColor: Color(0xffBF3027),
           appBarTheme: const AppBarTheme(
+            systemOverlayStyle: SystemUiOverlayStyle.dark,
             titleTextStyle: TextStyle(
                 fontSize: 17,
                 color: Color(0xff282828),

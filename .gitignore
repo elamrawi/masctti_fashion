@@ -31,7 +31,8 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
-
+# remove assets when finally project
+/assets/
 # Symbolication related
 app.*.symbols
 

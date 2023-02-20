@@ -4,7 +4,7 @@ import 'package:masctti_fashion/components/CardPayment.dart';
 import 'package:masctti_fashion/components/Payments.dart';
 import 'package:masctti_fashion/components/PrimaryButton.dart';
 import 'package:masctti_fashion/components/auth/PrimaryTextField.dart';
-import 'package:masctti_fashion/components/profile/ProfileLayout.dart';
+import 'package:masctti_fashion/components/LayoutSinglePage.dart';
 import 'package:masctti_fashion/controllers/PaymentEditController.dart';
 
 class PaymentEdit extends StatelessWidget {
@@ -12,7 +12,7 @@ class PaymentEdit extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProfileLayout(title: 'بطاقات الدفع', children: [
+    return LayoutSinglePage(title: 'بطاقات الدفع', children: [
       GetBuilder(
           init: PaymentEditController(),
           builder: (controller) => Payments(
@@ -67,7 +67,6 @@ class PaymentEdit extends StatelessWidget {
                 hintText: "",
                 validator: (val) => null),
           ),
-          SizedBox(width: 17),
           Expanded(
             child: PrimaryTextField(
                 keyboardType: TextInputType.number,
