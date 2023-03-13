@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:masctti_fashion/controllers/auth/PasswordRecoveryController.dart';
 
 class BoxCode extends StatelessWidget {
-  final controller = TextEditingController();
+  // final controller = TextEditingController();
   FocusNode focus;
   final onChanged;
+  final PasswordRecoveryController controller =
+      Get.put(PasswordRecoveryController());
   BoxCode(this.focus, {this.onChanged});
 
   @override
@@ -12,14 +16,12 @@ class BoxCode extends StatelessWidget {
       width: 44,
       height: 44,
       child: TextFormField(
-        // key: GlobalKey().currentState.,
-        // autofocus: ,
         focusNode: focus,
-        controller: controller,
+        // controller: controller,
         style: TextStyle(fontSize: 20),
-        validator: (val) {
-          // if(val.isEmpty || val.)
-          return null;
+        validator: (String? val) {
+          if (val!.isEmpty) return 'الحقل فارغ';
+          if (int.parse(val).isNaN) return 'يجب ان يكون رقم';
         },
         cursorRadius: Radius.circular(6),
         textAlign: TextAlign.center,
@@ -31,6 +33,7 @@ class BoxCode extends StatelessWidget {
         textAlignVertical: TextAlignVertical.bottom,
         // onChanged: () {},
         onChanged: onChanged,
+        onSaved: controller.saveNumber,
         decoration: InputDecoration(
           counterText: '',
           contentPadding: const EdgeInsets.only(left: 2, bottom: 30, top: 0),

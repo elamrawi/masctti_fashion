@@ -5,6 +5,8 @@ import 'package:masctti_fashion/components/auth/AuthLayout.dart';
 import 'package:masctti_fashion/components/auth/PrimaryTextField.dart';
 import 'package:masctti_fashion/components/auth/TitleAuth.dart';
 
+import '../../components/auth/PasswordTextField.dart';
+
 class NewPassword extends StatelessWidget {
   var keyForm = GlobalKey();
 
@@ -16,17 +18,18 @@ class NewPassword extends StatelessWidget {
       TitleAuth(
           title: "انشاء كلمة مرور جديدة",
           subTitle: "الآن يمكنك انشاء كلمة مرور جديدة"),
-      PrimaryTextField(
+      PasswordTextField(
+        controllerTextField: TextEditingController(),
         label: 'كلمة المرور الجديدة',
         hintText: "",
         validator: (val) => null,
-        isPass: true,
       ),
-      PrimaryTextField(
+      PasswordTextField(
+        controllerTextField: TextEditingController(),
         label: 'تأكيد كلمة المرور',
         hintText: "",
         validator: (val) => null,
-        isPass: true,
+        isNew: true,
       ),
       PrimaryButton(
           text: "تأكيد كلمة المرور",

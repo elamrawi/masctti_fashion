@@ -7,6 +7,11 @@ class EvaluatedUser extends StatelessWidget {
       required this.name,
       required this.contentEval,
       required this.urlImage});
+  String removeAllHtmlTags(String htmlText) {
+    RegExp exp = RegExp(r"<[^>]*>", multiLine: true, caseSensitive: true);
+
+    return htmlText.replaceAll(exp, '');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,14 +19,14 @@ class EvaluatedUser extends StatelessWidget {
       dense: true,
       horizontalTitleGap: 7,
       title: Padding(
-        padding: const EdgeInsets.only(top: 0, bottom: 7.0),
+        padding: const EdgeInsets.only(top: 8, bottom: 4.0),
         child: Text(
           name,
           style: TextStyle(
               color: Colors.black, fontSize: 14, fontWeight: FontWeight.w500),
         ),
       ),
-      subtitle: Text(contentEval,
+      subtitle: Text(removeAllHtmlTags(contentEval),
           style: TextStyle(
               color: Color(0xff838894),
               fontSize: 12,

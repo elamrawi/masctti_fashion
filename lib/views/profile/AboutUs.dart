@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:masctti_fashion/components/PrimaryButton.dart';
 import 'package:masctti_fashion/components/auth/PrimaryTextField.dart';
 import 'package:masctti_fashion/components/profile/ContentAboutUs.dart';
@@ -23,20 +24,34 @@ class AboutUs extends StatelessWidget {
         margin: EdgeInsets.symmetric(horizontal: 16),
         width: 343,
         height: 238,
-        color: Colors.grey,
-        child: Text("this is the map"),
+        child: GoogleMap(
+            // mapType: MapType.hybrid,
+            zoomControlsEnabled: false,
+            zoomGesturesEnabled: true,
+            markers: {
+              Marker(
+                markerId: MarkerId('my store address'),
+                position: LatLng(27.009806, 49.663324),
+              )
+            },
+            initialCameraPosition:
+                CameraPosition(target: LatLng(27.009806, 49.663324), zoom: 19)),
         alignment: Alignment.center,
       ),
       PrimaryTextField(
+          controllerTextField: TextEditingController(),
           label: 'تواصل معنا',
           hintText: "وسام زياد محمود مهدي",
           validator: (val) => null),
       PrimaryTextField(
+          keyboardType: TextInputType.emailAddress,
+          controllerTextField: TextEditingController(),
           label: 'البريد الالكتروني',
           hintText: "وسام زياد محمود مهدي",
           validator: (val) => null),
       PrimaryTextField(
-        keyboardType: TextInputType.multiline,
+          controllerTextField: TextEditingController(),
+          keyboardType: TextInputType.multiline,
           maxLines: 10,
           label: 'اكتب رسالتك',
           hintText: "رسالتك هنا",

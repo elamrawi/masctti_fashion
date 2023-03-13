@@ -1,22 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:masctti_fashion/controllers/PrimaryTextFieldController.dart';
+import 'package:masctti_fashion/controllers/PasswordTextFieldController.dart';
 
 class PrimaryTextField extends StatelessWidget {
-  final String label, hintText;
-  final bool isPass;
+  final String label, hintText, value;
   final TextInputType? keyboardType;
   final validator;
   final int maxLines;
   final Widget? prefix;
+  final TextEditingController controllerTextField;
   PrimaryTextField(
       {required this.label,
       required this.hintText,
-      this.isPass = false,
-      this.keyboardType,
+      required this.controllerTextField,
+      this.keyboardType =TextInputType.text,
       required this.validator,
       this.prefix,
-      this.maxLines = 1});
+      this.maxLines = 1,
+      this.value = ''});
 
   @override
   Widget build(BuildContext context) {
@@ -39,19 +40,15 @@ class PrimaryTextField extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          GetBuilder(
-              init: PrimaryTextFieldController(),
-              builder: (controller) => TextFormField(
+        TextFormField(
+                  controller: controllerTextField,
                   cursorHeight: 19,
                   mouseCursor: MouseCursor.defer,
 
                   // showCursor: false,
                   maxLines: maxLines,
-                  keyboardType: isPass
-                      ? TextInputType.visiblePassword
-                      : keyboardType ?? TextInputType.text,
+                  keyboardType:  keyboardType,
                   validator: validator,
-                  obscureText: isPass ? !controller.isShow : false,
                   textAlignVertical: TextAlignVertical.bottom,
                   style: TextStyle(fontSize: 16),
                   decoration: InputDecoration(
@@ -61,23 +58,8 @@ class PrimaryTextField extends StatelessWidget {
                         color: Color(0xff31394D).withOpacity(0.6)),
                     contentPadding:
                         EdgeInsets.only(bottom: 21, left: 10, right: 10),
-                    // EdgeInsets.only(top: 0, right: 10, left: 10),
-                    // contentPadding: EdgeInsets.zero,
-
-                    // hintText: hintText,
                     alignLabelWithHint: true,
                     labelText: hintText,
-                    suffixIcon: isPass
-                        ? IconButton(
-                            onPressed: controller.showPass,
-                            icon: Icon(
-                              controller.isShow
-                                  ? Icons.visibility_off_outlined
-                                  : Icons.visibility_outlined,
-                            ),
-                          )
-                        : null,
-
                     hintStyle: TextStyle(
                         fontSize: 16, color: Color.fromARGB(255, 8, 69, 222)),
                     enabledBorder: OutlineInputBorder(
@@ -95,7 +77,7 @@ class PrimaryTextField extends StatelessWidget {
                       borderSide: BorderSide(
                           color: Theme.of(context).primaryColor, width: 1),
                     ),
-                  ))),
+                  )),
         ],
       ),
     );

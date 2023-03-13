@@ -91,6 +91,7 @@ class ConfirmOrder extends StatelessWidget {
                       ],
                     ),
                     PrimaryTextField(
+                      controllerTextField: TextEditingController(),
                         label: 'الاسم كاملاً',
                         hintText: "وسام زياد محمود مهدي",
                         prefix: Padding(
@@ -108,6 +109,7 @@ class ConfirmOrder extends StatelessWidget {
                       children: [
                         Expanded(
                           child: PrimaryTextField(
+                            controllerTextField: TextEditingController(),
                               keyboardType: TextInputType.datetime,
                               label: "تاريخ الانتهاء",
                               hintText: "السنة/الشهر",
@@ -115,6 +117,7 @@ class ConfirmOrder extends StatelessWidget {
                         ),
                         Expanded(
                           child: PrimaryTextField(
+                            controllerTextField: TextEditingController(),
                               keyboardType: TextInputType.number,
                               label: "الرقم السرّي",
                               hintText: "1123",
@@ -123,6 +126,7 @@ class ConfirmOrder extends StatelessWidget {
                       ],
                     ),
                     PrimaryTextField(
+                      controllerTextField: TextEditingController(),
                         label: "الموقع",
                         hintText: "المدينة, المحافظة",
                         validator: (val) => null),

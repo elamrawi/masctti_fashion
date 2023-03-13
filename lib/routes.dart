@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:masctti_fashion/server/UserInfo.dart';
 import 'package:masctti_fashion/views/Home.dart';
 import 'package:masctti_fashion/views/Layout.dart';
 import 'package:masctti_fashion/views/Search.dart';
@@ -18,7 +19,8 @@ import 'package:masctti_fashion/views/profile/Profile.dart';
 import 'views/ConfirmOrder.dart';
 
 final List<GetPage> routes = [
-  GetPage(name: '/', page: () => Login()),
+  GetPage(
+      name: '/', page: () => UserInfo.box.hasData('id') ? Layout() : Login()),
   // authientcation screens
   GetPage(name: '/login', page: () => Login()),
   GetPage(name: '/sign-up', page: () => SignUp()),

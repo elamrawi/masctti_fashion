@@ -9,10 +9,10 @@ class Favorite extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutSinglePage(title: "المفضلة", children: [
-      ListProducts(),
-      ListProducts(),
-      ListProducts(),
-      ListProducts(),
+      // ListProducts(),
+      // ListProducts(),
+      // ListProducts(),
+      // ListProducts(),
     ]);
   }
 }

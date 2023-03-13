@@ -6,11 +6,15 @@ class ImageProduct extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 147,
-      height: 150,
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
-      child: Image.asset(urlImage),
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(12),
+      child: Container(
+          width: 147,
+          height: 150,
+          child: Image.network(
+            urlImage,
+            fit: BoxFit.cover,
+          )),
     );
   }
 }

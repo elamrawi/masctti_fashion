@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class TitleSection extends StatelessWidget {
   final String title;
   final showAll;
-  const TitleSection({required this.title, required this.showAll});
+  const TitleSection({required this.title,  this.showAll});
 
   @override
   Widget build(BuildContext context) {
@@ -15,14 +15,15 @@ class TitleSection extends StatelessWidget {
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
                 color: Color(0xff282828))),
-        InkWell(
-          onTap: showAll,
-          child: Text('عرض الكل',
-              style: TextStyle(
-                  color: Color(0xff838894),
-                  fontSize: 10,
-                  fontWeight: FontWeight.w500)),
-        )
+        if (showAll != null)
+          InkWell(
+            onTap: showAll,
+            child: Text('عرض الكل',
+                style: TextStyle(
+                    color: Color(0xff838894),
+                    fontSize: 10,
+                    fontWeight: FontWeight.w500)),
+          )
       ]),
     );
   }

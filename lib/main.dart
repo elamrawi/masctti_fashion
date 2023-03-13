@@ -1,11 +1,27 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:masctti_fashion/routes.dart';
+import 'package:masctti_fashion/server/api.dart';
 import 'package:masctti_fashion/views/auth/Login.dart';
+/**
+ * information api
+ * consumer key : ck_d73fcf02d2529fae157aee1f7c421d166016a908
+ * consumer secret : cs_57c29d9a8724d599c4c5dc29c52cd5222cd39f9b
+ * 
+ * information google map
+ * key api : AIzaSyBhXsfzoL2EpCOIHeNY1h3AIvUYCCEaG6g
+ */
 
-void main() {
+void main() async {
+  await GetStorage.init();
+
   WidgetsFlutterBinding.ensureInitialized();
+  HttpOverrides.global = MyHttpOverrides();
+  // await GetStorage.init();
   runApp(App());
 }
 
@@ -23,7 +39,7 @@ class App extends StatelessWidget {
     800: Color.fromRGBO(191, 48, 39, .9),
     900: Color.fromRGBO(191, 48, 39, 1),
   };
-
+  
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
@@ -44,5 +60,14 @@ class App extends StatelessWidget {
       textDirection: TextDirection.rtl,
       getPages: routes,
     );
+  }
+}
+
+class MyHttpOverrides extends HttpOverrides {
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)
+      ..badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
   }
 }

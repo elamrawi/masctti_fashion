@@ -53,6 +53,7 @@ class PaymentEdit extends StatelessWidget {
                 ],
               )),
       PrimaryTextField(
+        controllerTextField: TextEditingController(),
           label: "الاسم كاملا",
           hintText: "اسم المستخدم",
           validator: (val) => null),
@@ -62,6 +63,7 @@ class PaymentEdit extends StatelessWidget {
         children: [
           Expanded(
             child: PrimaryTextField(
+              controllerTextField: TextEditingController(),
                 keyboardType: TextInputType.datetime,
                 label: "تاريخ الانتهاء",
                 hintText: "",
@@ -69,6 +71,7 @@ class PaymentEdit extends StatelessWidget {
           ),
           Expanded(
             child: PrimaryTextField(
+              controllerTextField: TextEditingController(),
                 keyboardType: TextInputType.number,
                 label: "الرقم السرّي",
                 hintText: "",
@@ -77,6 +80,7 @@ class PaymentEdit extends StatelessWidget {
         ],
       ),
       PrimaryTextField(
+        controllerTextField: TextEditingController(),
           label: "الموقع",
           hintText: "المدينة, المحافظة",
           validator: (val) => null),

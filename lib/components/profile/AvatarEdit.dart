@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:masctti_fashion/server/UserInfo.dart';
 
 class AvatarEdit extends StatelessWidget {
   const AvatarEdit({super.key});
@@ -10,8 +11,8 @@ class AvatarEdit extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Stack(children: [
-        const CircleAvatar(
-          backgroundImage: AssetImage('assets/images/avatar.png'),
+        CircleAvatar(
+          backgroundImage: NetworkImage(UserInfo.box.read('avatar').toString()),
           radius: 37.5,
         ),
         Positioned(

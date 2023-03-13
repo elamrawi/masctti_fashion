@@ -7,12 +7,13 @@ class LayoutSinglePage extends StatelessWidget {
   final String title;
   final AlignmentGeometry alignment;
   final EdgeInsets margin;
-  final _keyAppBar = GlobalKey();
+  final GlobalKey<FormState>? keyForm;
   LayoutSinglePage({
     required this.title,
     required this.children,
     this.alignment = Alignment.center,
     this.margin = EdgeInsets.zero,
+    this.keyForm,
   });
 
   @override
@@ -28,16 +29,19 @@ class LayoutSinglePage extends StatelessWidget {
       body: Container(
           alignment: alignment,
           margin: margin,
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                ...children,
-                SizedBox(
-                  height: 12,
-                )
-              ],
+          child: Form(
+            key: keyForm,
+            child: SingleChildScrollView(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  ...children,
+                  SizedBox(
+                    height: 12,
+                  )
+                ],
+              ),
             ),
           )),
       floatingActionButton: Get.currentRoute ==

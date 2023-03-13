@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:masctti_fashion/components/profile/AvatarEdit.dart';
 import 'package:masctti_fashion/components/profile/ProfileItem.dart';
+import 'package:masctti_fashion/server/UserInfo.dart';
 import 'package:masctti_fashion/views/layout.dart';
 
 class Profile extends StatelessWidget {
@@ -21,8 +22,8 @@ class Profile extends StatelessWidget {
                 const SizedBox(
                   height: 16,
                 ),
-                const Text(
-                  'لارا أحمد',
+                Text(
+                  '${UserInfo.name}',
                   style: TextStyle(
                       color: Color(0xff282828),
                       fontSize: 16,
@@ -31,23 +32,24 @@ class Profile extends StatelessWidget {
                 const SizedBox(
                   height: 16,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  children: [
-                    SvgPicture.asset('assets/svgs/location.svg'),
-                    const Padding(
-                      padding: EdgeInsets.only(right: 10),
-                      child: Text(
-                        'السعودية, جدّة',
-                        style: TextStyle(
-                            color: Color(0xff838894),
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500),
-                      ),
-                    )
-                  ],
-                ),
+                if (UserInfo.location.isNotEmpty)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      SvgPicture.asset('assets/svgs/location.svg'),
+                      Padding(
+                        padding: EdgeInsets.only(right: 10),
+                        child: Text(
+                          UserInfo.location,
+                          style: TextStyle(
+                              color: Color(0xff838894),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w500),
+                        ),
+                      )
+                    ],
+                  ),
                 const SizedBox(
                   height: 16,
                 ),
@@ -93,7 +95,8 @@ class Profile extends StatelessWidget {
           ProfileItem(
             text: 'تسجيل الخروج',
             icon: Icons.logout,
-            onTap: () {
+            onTap: () async {
+              await UserInfo.clearData();
               Get.offNamed('/login');
             },
           )

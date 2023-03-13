@@ -36,9 +36,13 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   get: ^4.6.5
+  get_storage: ^2.0.3
   image_picker: ^0.8.6+1
   flutter_svg: ^2.0.0+1
-
+  dio: ^5.0.0
+  woocommerce_api: ^0.1.0
+  google_maps_flutter: ^2.2.5
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -81,6 +85,7 @@ flutter:
     - assets/images/product/avatar_evla.jpg
     - assets/images/product/order.jpg
     - assets/images/icon_detail.png
+    - assets/images/woocommerce-placeholder.png
     - assets/images/product/pro-1.png
     - assets/images/product/pro-2.png
     - assets/images/product/pro-3.png
