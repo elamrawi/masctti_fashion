@@ -82,7 +82,7 @@ flutter:
     # all
     # product
     - assets/images/product.png
-    - assets/images/product/avatar_evla.jpg
+    # - assets/images/product/avatar_evla.jpg
     - assets/images/product/order.jpg
     - assets/images/icon_detail.png
     - assets/images/woocommerce-placeholder.png
