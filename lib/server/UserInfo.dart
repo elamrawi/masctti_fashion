@@ -1,10 +1,13 @@
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:masctti_fashion/models/Product.dart';
 
 import '../models/Customer.dart';
 
 class UserInfo {
   static final box = GetStorage();
   static int get id => box.read('id');
+
   static String get name {
     if (box.hasData('first_name') && box.hasData('last_name'))
       return "${box.read('first_name')} ${box.read('last_name')}";
@@ -12,6 +15,11 @@ class UserInfo {
       return "${box.read('first_name')}";
     else if (box.hasData('last_name')) return "${box.read('last_name')}";
     return "";
+  }
+
+  static List<Product> get favorites {
+    if (box.hasData('favoriteProduct')) return [];
+    return box.read('favoriteProduct');
   }
 
   static String get location {
@@ -40,12 +48,12 @@ class UserInfo {
     box.write('avatar', data.avatarUrl);
     box.write('city', data.billing!.city);
     box.write('country', data.billing!.country);
-    box.write('city', data.shipping!.city);
-    box.write('country', data.shipping!.country);
   }
 
   static setPersonalInfo(Customer data) {
     box.write('email', data.email);
+    box.write('first_name', data.firstName);
+    box.write('last_name', data.lastName);
     box.write('phone', data.billing!.phone);
     box.write('city', data.billing!.city);
     box.write('country', data.billing!.country);
@@ -58,11 +66,56 @@ class UserInfo {
 
   static getAllData() {}
   static clearData() async {
-    return await box.erase();
+    await box.remove('id');
+    await box.remove('username');
+    await box.remove('email');
+    await box.remove('first_name');
+    await box.remove('last_name');
+    await box.remove('phone');
+    await box.remove('avatar');
+    await box.remove('city');
+    await box.remove('country');
+    await box.remove('city');
+    await box.remove('country');
   }
 
   static addOrder(order) {}
   static setImageAvatar(imageUrl) {}
   static setPayment({fullname, dateLast, code, location, typePayment}) {}
-  static addFavorite(product) {}
+  static addFavorite(product) {
+    List<int> favoriteProduct = [];
+    if (box.hasData('favoriteProduct'))
+      favoriteProduct = box.read('favoriteProduct');
+    favoriteProduct.add(product.id);
+    box.write('favoriteProduct', favoriteProduct);
+  }
+
+  static removeFavorite(product) {
+    List<int> favoriteProduct = [];
+    if (box.hasData('favoriteProduct'))
+      favoriteProduct = box.read('favoriteProduct');
+    favoriteProduct.remove(product.id);
+    box.write('favoriteProduct', favoriteProduct);
+    // List<Product> favoriteProduct = box.read('favoriteProduct') ?? [];
+    // favoriteProduct.remove(product);
+    // box.write('favoriteProduct', favoriteProduct);
+  }
+
+  static addSearchHistory(text) {
+    if (box.hasData('search_history')) {
+      List searchHistory = box.read('search_history');
+      if (searchHistory.contains(text)) {
+        searchHistory.remove(text);
+        searchHistory.add(text);
+      } else {
+        if (searchHistory.length >= 20) {
+          searchHistory.removeAt(0);
+          searchHistory.add(text);
+        } else
+          searchHistory.addIf(searchHistory.length < 20, text);
+      }
+      box.write('search_history', searchHistory);
+    } else
+      box.write('search_history', [text]);
+  }
 }

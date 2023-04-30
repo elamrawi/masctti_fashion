@@ -33,6 +33,20 @@ class PersonalInfo extends StatelessWidget {
                     //       if (val!.length < 3) return 'اسم المستخدم قصير جداً.';
                     //     }),
                     PrimaryTextField(
+                        controllerTextField: controller.firstName,
+                        label: 'الاسم الأول',
+                        hintText: "الاسم الأول",
+                        validator: (String? val) {
+                          if (val == '') return 'يجب ملأ حقل الاسم الأول';
+                        }),
+                    PrimaryTextField(
+                        controllerTextField: controller.lastName,
+                        label: 'الأسم الأخير',
+                        hintText: "الأسم الأخير",
+                        validator: (String? val) {
+                          if (val == '') return 'يجب ملأ حقل الأسم الأخير.';
+                        }),
+                    PrimaryTextField(
                         controllerTextField: controller.email,
                         label: 'البريد الالكتروني',
                         hintText: "البريد الالكتروني",

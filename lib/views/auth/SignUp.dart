@@ -22,59 +22,61 @@ class SignUp extends StatelessWidget {
     return GetBuilder(
         init: SignUpController(),
         builder: (controller) {
-          if (controller.isload) LoadingScreen();
-
-          return AuthLayout(
-            keyForm: controller.keyForm,
-            children: [
-              const TitleAuth(
-                  title: 'انشئ حساب جديد', subTitle: 'وأستمتع بأكبر العروض'),
-              PrimaryTextField(
-                controllerTextField: controller.email,
-                label: 'البريد الالكتروني',
-                hintText: 'البريد الالكتروني',
-                keyboardType: TextInputType.emailAddress,
-                validator: (String? val) {
-                  if (val == '') return 'يجب ملأ حقل بريد الالكتروني.';
-                  if (!val!.isEmail) return 'يجب ان يكون بريد الكتروني.';
-                },
-              ),
-              PrimaryTextField(
-                controllerTextField: controller.username,
-                label: 'اسم المستخدم',
-                hintText: "اسم المستخدم",
-                keyboardType: TextInputType.name,
-                validator: (String? val) {
-                  if (val == '') return 'يجب ملأ حقل اسم المستخدم.';
-                  if (val!.length < 3) return 'اسم المستخدم قصير جداً.';
-                },
-              ),
-              PasswordTextField(
-                controllerTextField: controller.password,
-                label: 'كلمة المرور',
-                hintText: "",
-                keyboardType: TextInputType.visiblePassword,
-                validator: (String? val) {
-                  if (val == '') return 'يجب ملأ حقل كلمة المرور.';
-                  if (val!.length < 8)
-                    return "يجب ان تحتوي كلمة السر على 8 أحرف على الأقل.";
-                },
-              ),
-              PrimaryButton(
-                text: 'انشاء حساب',
-                onPressed: controller.signUp,
-              ),
-              LineAuth('أنشئ من خلال'),
-              ContainerButtonSocial(),
-              QuestionAuth(
-                text: 'بالفعل لديك حساب ؟ ',
-                textLink: "سجل الدخول",
-                onTap: () {
-                  Get.offNamed('/login');
-                },
-              )
-            ],
-          );
+          print('build sign up');
+          return controller.isloading
+              ? LoadingScreen()
+              : AuthLayout(
+                  keyForm: controller.keyForm,
+                  children: [
+                    const TitleAuth(
+                        title: 'انشئ حساب جديد',
+                        subTitle: 'وأستمتع بأكبر العروض'),
+                    PrimaryTextField(
+                      controllerTextField: controller.email,
+                      label: 'البريد الالكتروني',
+                      hintText: 'البريد الالكتروني',
+                      keyboardType: TextInputType.emailAddress,
+                      validator: (String? val) {
+                        if (val == '') return 'يجب ملأ حقل بريد الالكتروني.';
+                        if (!val!.isEmail) return 'يجب ان يكون بريد الكتروني.';
+                      },
+                    ),
+                    PrimaryTextField(
+                      controllerTextField: controller.username,
+                      label: 'اسم المستخدم',
+                      hintText: "اسم المستخدم",
+                      keyboardType: TextInputType.name,
+                      validator: (String? val) {
+                        if (val == '') return 'يجب ملأ حقل اسم المستخدم.';
+                        if (val!.length < 3) return 'اسم المستخدم قصير جداً.';
+                      },
+                    ),
+                    PasswordTextField(
+                      controllerTextField: controller.password,
+                      label: 'كلمة المرور',
+                      hintText: "",
+                      keyboardType: TextInputType.visiblePassword,
+                      validator: (String? val) {
+                        if (val == '') return 'يجب ملأ حقل كلمة المرور.';
+                        if (val!.length < 8)
+                          return "يجب ان تحتوي كلمة السر على 8 أحرف على الأقل.";
+                      },
+                    ),
+                    PrimaryButton(
+                      text: 'انشاء حساب',
+                      onPressed: controller.signUp,
+                    ),
+                    LineAuth('أنشئ من خلال'),
+                    ContainerButtonSocial(),
+                    QuestionAuth(
+                      text: 'بالفعل لديك حساب ؟ ',
+                      textLink: "سجل الدخول",
+                      onTap: () {
+                        Get.offNamed('/login');
+                      },
+                    )
+                  ],
+                );
         });
   }
 }

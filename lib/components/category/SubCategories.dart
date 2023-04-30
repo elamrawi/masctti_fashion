@@ -9,7 +9,7 @@ class SubCategories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<LayoutController>(builder: (controller) {
-      if (controller.subCategroies == []) return Container();
+      if (controller.subCategroies.isEmpty) return Container();
       return Container(
         height: 50,
         child: ListView.separated(
@@ -17,7 +17,8 @@ class SubCategories extends StatelessWidget {
             text: controller.subCategroies[i].name.toString(),
             onPressed: () =>
                 controller.selectSubCategory(controller.subCategroies[i]),
-            active: true,
+            active: controller.subCategroies[i].id ==
+                controller.indexSelectedSubCategory,
           ),
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
           scrollDirection: Axis.horizontal,

@@ -9,6 +9,10 @@ class PersonalInfoController extends GetxController {
   final GlobalKey<FormState> keyForm = GlobalKey();
   // final TextEditingController username =
   //     TextEditingController(text: UserInfo.box.read('username'));
+  final TextEditingController firstName =
+      TextEditingController(text: UserInfo.box.read('first_name'));
+  final TextEditingController lastName =
+      TextEditingController(text: UserInfo.box.read('last_name'));
   final TextEditingController email =
       TextEditingController(text: UserInfo.box.read('email'));
   final TextEditingController phone =
@@ -24,7 +28,8 @@ class PersonalInfoController extends GetxController {
       String country = locations[1].trim();
       Map<String, dynamic> newCustomer = await Api.updateCustomer(
         UserInfo.box.read('id'),
-        // username: username.text,
+        firstName: firstName.text,
+        lastName: lastName.text,
         email: email.text,
         phone: phone.text,
         city: city,

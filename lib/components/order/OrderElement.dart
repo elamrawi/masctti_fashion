@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:masctti_fashion/models/LineItems.dart';
+
+import '../../controllers/LayoutController.dart';
 
 class OrderElement extends StatelessWidget {
-  const OrderElement({super.key});
+  final LineItems lineItem;
+  final String name, urlImage;
+  final int quantity, price;
+  final LayoutController controller = Get.put(LayoutController());
+  OrderElement(this.lineItem,
+      {super.key,
+      required this.name,
+      required this.price,
+      required this.urlImage,
+      required this.quantity});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +25,7 @@ class OrderElement extends StatelessWidget {
           Expanded(
             child: ListTile(
               title: Text(
-                "تنورة طويلة",
+                "$name",
                 style: TextStyle(
                   color: Colors.black,
                   fontSize: 14,
@@ -20,7 +33,7 @@ class OrderElement extends StatelessWidget {
                 ),
               ),
               subtitle: Text(
-                "120 ريال",
+                "$price ريال",
                 style: TextStyle(
                     color: Theme.of(context).primaryColor,
                     fontSize: 12,
@@ -29,7 +42,7 @@ class OrderElement extends StatelessWidget {
               visualDensity: VisualDensity(vertical: 0),
               dense: true,
               leading: CircleAvatar(
-                backgroundImage: AssetImage('assets/images/product/order.jpg'),
+                backgroundImage: NetworkImage(urlImage),
               ),
               contentPadding: EdgeInsets.zero,
               horizontalTitleGap: 8,
@@ -41,7 +54,7 @@ class OrderElement extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
-                  'الكمية المطلوبة 1',
+                  'الكمية المطلوبة $quantity',
                   style: TextStyle(
                     color: Color(0xff838894),
                     fontSize: 12,
@@ -61,7 +74,7 @@ class OrderElement extends StatelessWidget {
                             ),
                             padding: EdgeInsets.zero,
                             minimumSize: const Size(22.84, 22.84)),
-                        onPressed: () {},
+                        onPressed: () => controller.plusQuatily(lineItem),
                         child: const Icon(
                           Icons.add,
                           size: 10,
@@ -79,7 +92,7 @@ class OrderElement extends StatelessWidget {
                                       color: Color(0xffE8E9EA))),
                               padding: EdgeInsets.zero,
                               minimumSize: const Size(22.84, 22.84)),
-                          onPressed: () {},
+                          onPressed: () => controller.smiQuatily(lineItem),
                           child: const Icon(
                             Icons.remove,
                             size: 10,

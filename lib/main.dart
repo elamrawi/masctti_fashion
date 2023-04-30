@@ -5,8 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:masctti_fashion/routes.dart';
-import 'package:masctti_fashion/server/api.dart';
-import 'package:masctti_fashion/views/auth/Login.dart';
 /**
  * information api
  * consumer key : ck_d73fcf02d2529fae157aee1f7c421d166016a908
@@ -17,13 +15,17 @@ import 'package:masctti_fashion/views/auth/Login.dart';
  */
 
 void main() async {
-  await GetStorage.init();
-
   WidgetsFlutterBinding.ensureInitialized();
+  // إذا ظهر خطأ فهو من هنا
+  await GetStorage.init();
   HttpOverrides.global = MyHttpOverrides();
-  // await GetStorage.init();
   runApp(App());
 }
+
+/**
+ * notes:
+ * add controllers to screen in home,category,order... and use Get.put(pemnert: true) becuse no remove data
+ */
 
 class App extends StatelessWidget {
   App({super.key});
@@ -39,7 +41,7 @@ class App extends StatelessWidget {
     800: Color.fromRGBO(191, 48, 39, .9),
     900: Color.fromRGBO(191, 48, 39, 1),
   };
-  
+
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(

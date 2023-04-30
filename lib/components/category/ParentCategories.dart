@@ -4,11 +4,11 @@ import 'package:masctti_fashion/components/category/ButtonParentCate.dart';
 import 'package:masctti_fashion/controllers/LayoutController.dart';
 
 class ParentCategories extends StatelessWidget {
-  ParentCategories({super.key});
+  const ParentCategories({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 40,
       child: GetBuilder<LayoutController>(builder: (controller) {
         return ListView.separated(
@@ -20,9 +20,10 @@ class ParentCategories extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemBuilder: (ctx, i) => ButtonParentCate(
                   text: controller.parentCategories[i].name.toString(),
-                  onPressed: () =>
-                      controller.showSubCategory(controller.parentCategories[i].id),
-                  active: true,
+                  onPressed: () => controller
+                      .showSubCategory(controller.parentCategories[i].id),
+                  active: controller.parentCategories[i].id ==
+                      controller.indexSelectedParentCategory,
                 ));
       }),
     );

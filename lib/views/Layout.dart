@@ -18,7 +18,12 @@ class Layout extends StatelessWidget {
       'screen': Home(),
       'title': Container(
           margin: EdgeInsets.symmetric(horizontal: 16),
-          child: SearchTextField())
+          child: SearchTextField(
+            readOnly: true,
+            onTap: () {
+              Get.toNamed('/search');
+            },
+          ))
     },
     {'screen': Category(), 'title': ParentCategories(), 'titlespacing': true},
     {'screen': Order(), 'title': Text('سلّة المشتريات')},
@@ -51,8 +56,8 @@ class Layout extends StatelessWidget {
           onTap: controller.ChangePage,
           items: [
             BottomNavigationBarItem(
-              icon: Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+              icon: Container(
+                padding: const EdgeInsets.only(bottom: 8.0, top: 10),
                 child: SvgPicture.asset(
                   'assets/svgs/navigationbar_icons/home.svg',
                   color: controller.indexPage == 0
@@ -63,8 +68,8 @@ class Layout extends StatelessWidget {
               label: 'الرئيسية',
             ),
             BottomNavigationBarItem(
-                icon: Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
+                icon: Container(
+                  padding: const EdgeInsets.only(bottom: 8.0, top: 10),
                   child: SvgPicture.asset(
                     'assets/svgs/navigationbar_icons/categories.svg',
                     color: controller.indexPage == 1
@@ -74,19 +79,53 @@ class Layout extends StatelessWidget {
                 ),
                 label: 'التصنيفات'),
             BottomNavigationBarItem(
-                icon: Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
-                  child: SvgPicture.asset(
-                    'assets/svgs/navigationbar_icons/basket.svg',
-                    color: controller.indexPage == 2
-                        ? Theme.of(context).primaryColor
-                        : null,
+                icon: Container(
+                  padding: const EdgeInsets.only(
+                    bottom: 8,
+                    top: 10.0,
+                  ),
+                  child: Stack(
+                    clipBehavior: Clip.none,
+                    children: [
+                      SvgPicture.asset(
+                        'assets/svgs/navigationbar_icons/basket.svg',
+                        color: controller.indexPage == 2
+                            ? Theme.of(context).primaryColor
+                            : null,
+                      ),
+                      GetBuilder<LayoutController>(
+                        builder: (controller) => controller.lineItems.isNotEmpty
+                            ? Positioned(
+                                top: -5,
+                                right: -10,
+                                child: Container(
+                                  width: 18,
+                                  height: 18,
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    controller.lineItems.length.toString(),
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 8,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  padding: EdgeInsets.only(
+                                      left: 2, right: 2, top: 2),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    color: Color(0xffBF3027),
+                                  ),
+                                ),
+                              )
+                            : Stack(),
+                      )
+                    ],
                   ),
                 ),
                 label: 'السلة'),
             BottomNavigationBarItem(
-                icon: Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
+                icon: Container(
+                  padding: const EdgeInsets.only(bottom: 8.0, top: 10),
                   child: SvgPicture.asset(
                     'assets/svgs/navigationbar_icons/notifactions.svg',
                     color: controller.indexPage == 3
@@ -96,8 +135,8 @@ class Layout extends StatelessWidget {
                 ),
                 label: 'التنبيهات'),
             BottomNavigationBarItem(
-              icon: Padding(
-                padding: const EdgeInsets.only(bottom: 8.0),
+              icon: Container(
+                padding: const EdgeInsets.only(bottom: 8.0, top: 10),
                 child: SvgPicture.asset(
                   'assets/svgs/navigationbar_icons/profile.svg',
                   color: controller.indexPage == 4

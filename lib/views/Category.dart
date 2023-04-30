@@ -6,6 +6,8 @@ import 'package:masctti_fashion/components/TitleSection.dart';
 import 'package:masctti_fashion/components/category/SubCategories.dart';
 import 'package:masctti_fashion/controllers/LayoutController.dart';
 
+import '../components/NoInternet.dart';
+
 class Category extends StatelessWidget {
   const Category({super.key});
 
@@ -16,11 +18,19 @@ class Category extends StatelessWidget {
       child: Column(children: [
         SubCategories(),
         GetBuilder<LayoutController>(
+            init: LayoutController(),
             builder: (controller) =>
                 TitleSection(title: controller.titleCategory)),
         GetBuilder<LayoutController>(
-            init: LayoutController(),
             builder: (controller) {
+              if (!controller.isConnectInternet)
+                return Container(
+                  alignment: Alignment.center,
+                  height: MediaQuery.of(context).size.height - 215,
+                  child: NoInternet(
+                    reload: controller.reloadProducts,
+                  ),
+                );
               if (controller.isloadCate)
                 return Container(
                   height: MediaQuery.of(context).size.height - 200,
@@ -37,7 +47,12 @@ class Category extends StatelessWidget {
                   child: Text('لا يوجد منتجات في هذا التصنيف'),
                 );
 
-              return GridProducts(controller.categoryProducts!);
+              return SizedBox(
+                  height: MediaQuery.of(context).size.height - 200,
+                  child: GridProducts(
+                    controller.categoryProducts!,
+                    controller: controller,
+                  ));
             }),
       ]),
     );

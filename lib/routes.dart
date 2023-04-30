@@ -3,7 +3,8 @@ import 'package:masctti_fashion/server/UserInfo.dart';
 import 'package:masctti_fashion/views/Home.dart';
 import 'package:masctti_fashion/views/Layout.dart';
 import 'package:masctti_fashion/views/Search.dart';
-import 'package:masctti_fashion/views/SingleProduct.dart';
+import 'package:masctti_fashion/views/SearchProducts.dart';
+import 'package:masctti_fashion/views/SingleProducts.dart';
 import 'package:masctti_fashion/views/auth/ForgotPassword.dart';
 import 'package:masctti_fashion/views/auth/Login.dart';
 import 'package:masctti_fashion/views/auth/NewPassword.dart';
@@ -13,7 +14,7 @@ import 'package:masctti_fashion/views/profile/AboutUs.dart';
 import 'package:masctti_fashion/views/profile/ChangePassword.dart';
 import 'package:masctti_fashion/views/profile/Favorite.dart';
 import 'package:masctti_fashion/views/profile/PaymentEdit.dart';
-import 'package:masctti_fashion/views/profile/PresonalInfo.dart';
+import 'package:masctti_fashion/views/profile/PersonalInfo.dart';
 import 'package:masctti_fashion/views/profile/Profile.dart';
 
 import 'views/ConfirmOrder.dart';
@@ -36,7 +37,8 @@ final List<GetPage> routes = [
   GetPage(name: '/favorite', page: () => Favorite()),
   GetPage(name: '/layout', page: () => Layout()),
   GetPage(name: '/search', page: () => Search()),
+  GetPage(name: '/search-products', page: () => SearchProducts()),
   // all
-  GetPage(name: '/single-product', page: () => SingleProduct()),
+  GetPage(name: '/single-product', page: () => SingleProducts()),
   GetPage(name: '/confirm-order', page: () => ConfirmOrder()),
 ];

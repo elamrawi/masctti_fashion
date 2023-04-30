@@ -4,11 +4,12 @@ class ButtonParentCate extends StatelessWidget {
   final String text;
   final onPressed;
   final bool active;
-  const ButtonParentCate(
-      {super.key,
-      required this.text,
-      required this.onPressed,
-      this.active = false});
+  const ButtonParentCate({
+    super.key,
+    required this.text,
+    required this.onPressed,
+    this.active = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class ButtonParentCate extends StatelessWidget {
           padding: const EdgeInsets.only(top: 2),
           child: Text(
             text,
-            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
             textAlign: TextAlign.center,
           ),
         ));

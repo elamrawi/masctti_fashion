@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 class SearchItem extends StatelessWidget {
   final String text;
-  const SearchItem(this.text, {super.key});
+  final onTap;
+   SearchItem(this.text, {super.key,this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: onTap,
       dense: true,
       contentPadding: EdgeInsets.symmetric(horizontal: 16),
       title: Text(text,

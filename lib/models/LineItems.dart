@@ -16,22 +16,25 @@ class LineItems {
   List<MetaData>? metaData;
   String? sku;
   int? price;
+  late String urlImage;
 
-  LineItems(
-      {this.id,
-      this.name,
-      this.productId,
-      this.variationId,
-      this.quantity,
-      this.taxClass,
-      this.subtotal,
-      this.subtotalTax,
-      this.total,
-      this.totalTax,
-      this.taxes,
-      this.metaData,
-      this.sku,
-      this.price});
+  LineItems({
+    this.id,
+    this.name,
+    this.productId,
+    this.variationId,
+    this.quantity,
+    this.taxClass,
+    this.subtotal,
+    this.subtotalTax,
+    this.total,
+    this.totalTax,
+    this.taxes,
+    this.metaData,
+    this.sku,
+    this.price,
+    this.urlImage = '',
+  });
 
   LineItems.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -61,7 +64,8 @@ class LineItems {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    // final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = {};
     data['id'] = this.id;
     data['name'] = this.name;
     data['product_id'] = this.productId;

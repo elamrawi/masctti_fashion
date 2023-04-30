@@ -1,24 +1,28 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:masctti_fashion/models/Product.dart';
-import 'package:masctti_fashion/models/Review.dart';
+import 'package:masctti_fashion/server/UserInfo.dart';
 import 'package:masctti_fashion/server/api.dart';
 
 class SingleProductController extends GetxController {
-  var size;
-  int quantity = 0;
+  String? size;
+  int quantity = 1;
   TextEditingController quantityController = TextEditingController(text: "1");
   Product? product;
   List reviews = [];
-  bool isloading = false;
+  bool isloading = true;
+  bool isFavorite = false;
   @override
   void onInit() async {
-    isloading = true;
-    update();
-    product = await Api.getProduct(Get.arguments['product_id']);
-    reviews = await Api.getReviews(Get.arguments['product_id']);
+    product = Get.arguments['product'];
+    reviews = await Api.getReviews(product!.id!);
+
     reviews =
         reviews.where((review) => review['status'] == 'approved').toList();
+    // if (UserInfo.box.hasData('favoriteProduct'))
+    //   isFavorite = UserInfo.box
+    //       .read('favoriteProduct')
+    //       .any((favorite) => int.parse(favorite.id) == product!.id);
     isloading = false;
     update();
     super.onInit();
@@ -41,5 +45,13 @@ class SingleProductController extends GetxController {
       quantityController.text = quantity.toString();
       update();
     }
+  }
+
+  void toggleFavorite() {
+    isFavorite
+        ? UserInfo.removeFavorite(Get.arguments['product'])
+        : UserInfo.addFavorite(Get.arguments['product']);
+    isFavorite = !isFavorite;
+    update();
   }
 }

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:masctti_fashion/components/Product/ProductEvaluation.dart';
+import 'package:masctti_fashion/controllers/LayoutController.dart';
+import 'package:masctti_fashion/server/UserInfo.dart';
+import '../models/Product.dart' as model;
 
 class Product extends StatelessWidget {
-  final int id;
+  final model.Product product;
   final String name, urlImage, price;
   final double evaluation;
   String get getName {
@@ -13,7 +16,7 @@ class Product extends StatelessWidget {
   }
 
   Product(
-    this.id, {
+    this.product, {
     super.key,
     required this.name,
     required this.evaluation,
@@ -25,7 +28,7 @@ class Product extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.toNamed('/single-product', arguments: {'product_id': id});
+        Get.toNamed('/single-product', arguments: {'product': product});
       },
       child: Container(
         height: 200,
@@ -74,12 +77,17 @@ class Product extends StatelessWidget {
                           ),
                         ),
                       ),
-                      InkWell(
-                        child: Icon(
-                          Icons.favorite_outline,
-                          color: Color(0xffF93939),
-                        ),
-                      ),
+                      GetBuilder<LayoutController>(builder: (controller) {
+                        return InkWell(
+                          onTap: () => controller.toggleFavorite(product),
+                          child: Icon(
+                            controller.getIsFavorite(product.featured)
+                                ? Icons.favorite
+                                : Icons.favorite_outline,
+                            color: Color(0xffF93939),
+                          ),
+                        );
+                      }),
                     ],
                   ),
                   Text(
@@ -89,9 +97,7 @@ class Product extends StatelessWidget {
                         fontSize: 11,
                         fontWeight: FontWeight.w500),
                   ),
-                  SizedBox(
-                    height: 3,
-                  ),
+                  const SizedBox(height: 3),
                   ProductEvaluation(
                     evaluation,
                     size: 9,

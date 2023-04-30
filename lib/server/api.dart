@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:masctti_fashion/models/Customer.dart';
-import 'package:masctti_fashion/models/Review.dart';
+import 'package:masctti_fashion/models/LineItems.dart';
+import 'package:masctti_fashion/server/UserInfo.dart';
 import 'package:woocommerce_api/woocommerce_api.dart';
 import '../models/Category.dart';
 import '../models/Product.dart';
-import 'package:http/http.dart' as http;
 
 class Api {
   static final _api = WooCommerceAPI(
@@ -52,18 +52,25 @@ class Api {
     return product;
   }
 
+  static Future<List<Product>> getProductsId(List<int> ids) async {
+    List data = await _api.getAsync('products');
+    List<Product> products =
+        data.map<Product>((e) => Product.fromJson(e)).toList();
+    List<Product> favoriteProducts = [];
+    for (Product product in products) {
+      if (ids.any((id) => id == product.id)) favoriteProducts.add(product);
+    }
+    return favoriteProducts;
+  }
+
 // Future<List<Review>>
-  static  getReviews(id) async {
-    // List data = await _api.getAsync("products/reviews");
-    // List<Review> reviews = data.map<Review>((d) => Review.fromJson(d)).toList();
-    // return reviews;
+  static getReviews(int id) async {
     Response response =
         await _apiBasicJson.get('wc/v3/products/reviews', queryParameters: {
       'product': id,
       'consumer_key': 'ck_c529bd1c2795f733b61c0a877de228142afe0982',
       'consumer_secret': 'cs_f980917b77887f5ba049a94e8de1a6f8a2d0d32d'
     });
- 
     return response.data;
   }
 
@@ -74,8 +81,9 @@ class Api {
     return categories;
   }
 
-  static Future<List<Product>> getCategoryProducts(int id) async {
-    List data = await _api.getAsync('products?category=$id');
+  static Future<List<Product>> getCategoryProducts(int id, {page = 1}) async {
+    List data =
+        await _api.getAsync('products?category=$id&page=$page&per_page=12');
     List<Product> products =
         data.map<Product>((d) => Product.fromJson(d)).toList();
     return products;
@@ -126,16 +134,29 @@ class Api {
     return data;
   }
 
-  static Future updateCustomer(id,
-      {required String email, phone, city, country}) async {
+  static Future updateCustomer(
+    id, {
+    required String email,
+    required String firstName,
+    required String lastName,
+    phone,
+    city,
+    country,
+  }) async {
     Map data = await _api.postAsync('customers/$id', {
       'email': email,
+      'first_name': firstName,
+      'last_name': lastName,
       'billing': {
+        'first_name': firstName,
+        'last_name': lastName,
         'city': city,
         'country': country,
         'phone': phone,
       },
       'shipping': {
+        'first_name': firstName,
+        'last_name': lastName,
         'city': city,
         'country': country,
         'phone': phone,
@@ -154,14 +175,56 @@ class Api {
         });
     return json.decode(data.data);
   }
-}
 
-// get product dio
-// var api = Dio(BaseOptions(
-//   baseUrl: 'https://masotti-fashion.com/wp-json/wc/v3/',
-//   contentType: 'application/json',
-//   queryParameters: {
-//     'consumer_key': 'ck_c529bd1c2795f733b61c0a877de228142afe0982',
-//     'consumer_secret': 'cs_f980917b77887f5ba049a94e8de1a6f8a2d0d32d'
-//   },
-// ));
+  static Future<Map> createOrder(List<LineItems> lineItems, delivery) async {
+    Map data = {
+      "payment_method": "paiement_when_recieving",
+      "payment_method_title": "Paiement When Recieving",
+      "set_paid": true,
+      "billing": {
+        "first_name": UserInfo.box.read('first_name'),
+        "last_name": UserInfo.box.read('last_name'),
+        // "address_1": "969 Market",
+        // "address_2": "",
+        "city": UserInfo.box.read('city'),
+        // "state": "CA",
+        // "postcode": "94103",
+        "country": UserInfo.box.read('country'),
+        "email": UserInfo.box.read('email'),
+        "phone": UserInfo.phone,
+      },
+      "shipping": {
+        "first_name": UserInfo.box.read('first_name'),
+        "last_name": UserInfo.box.read('last_name'),
+        // "address_1": "969 Market",
+        // "address_2": "",
+        "city": UserInfo.box.read('city'),
+        // "state": "CA",
+        // "postcode": "94103",
+        "country": UserInfo.box.read('country'),
+      },
+      "line_items": lineItems
+          .map((lineItem) =>
+              {"product_id": lineItem.productId, "quantity": lineItem.quantity})
+          .toList(),
+      "shipping_lines": [
+        if (delivery == 'delivery')
+          {
+            "method_id": "delivery_fee",
+            "method_title": "Delivery fee",
+            "total": "12"
+          }
+      ]
+    };
+    Map respon = await _api.postAsync('orders', data);
+    return respon;
+  }
+
+  static Future<List<Product>> getSearchProducts(resultSearch) async {
+    List data =
+        await _api.getAsync("products?per_page=99&search=$resultSearch");
+    List<Product> products =
+        data.map<Product>((d) => Product.fromJson(d)).toList();
+    return products;
+  }
+}

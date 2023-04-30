@@ -25,9 +25,7 @@ class LoginController extends GetxController {
       if (!response['state']) {
         Get.defaultDialog(
             textCancel: 'حسناً',
-            onCancel: () {
-              Get.back();
-            },
+           
             radius: 6,
             titlePadding: EdgeInsets.only(top: 20),
             title: "خطأ في تسجيل الدخول",
