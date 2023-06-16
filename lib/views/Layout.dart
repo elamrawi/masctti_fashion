@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:masctti_fashion/controllers/LayoutController.dart';
 import 'package:masctti_fashion/server/api.dart';
+import 'package:masctti_fashion/server/payment.dart';
 import 'package:masctti_fashion/views/Category.dart';
 import 'package:masctti_fashion/views/Home.dart';
 import 'package:masctti_fashion/views/Notifications.dart';
@@ -34,6 +35,12 @@ class Layout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.payment),
+        onPressed: () {
+          ApiPayment.createCreditCard();
+        },
+      ),
       appBar: AppBar(
         titleSpacing: 0,
         backgroundColor: Colors.white,

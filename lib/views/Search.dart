@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import "package:get/get.dart";
-import "package:masctti_fashion/controllers/SearchController.dart";
+import "../controllers/SearchController.dart" as con;
 
 import "../components/LayoutSinglePage.dart";
 import "../components/SearchItem.dart";
@@ -8,7 +8,7 @@ import "../components/SearchTextField.dart";
 
 class Search extends StatelessWidget {
   Search({super.key});
-  final SearchController controller = Get.put(SearchController());
+  final con.SearchController controller = Get.put(con.SearchController());
   @override
   Widget build(BuildContext context) {
     return LayoutSinglePage(
@@ -48,7 +48,7 @@ class Search extends StatelessWidget {
         ),
         SizedBox(
           height: MediaQuery.of(context).size.height - 170,
-          child: GetBuilder<SearchController>(builder: (controller) {
+          child: GetBuilder<con.SearchController>(builder: (controller) {
             return ListView(
               children: controller.resultsSearch.reversed
                   .map(
@@ -60,7 +60,7 @@ class Search extends StatelessWidget {
                   .toList(),
             );
           }),
-        )
+        ),
       ],
     );
   }
